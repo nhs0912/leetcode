@@ -1,12 +1,9 @@
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.util.StringTokenizer;
 
 /**
  * 13. Roman to Integer
  * Easy
- * <p>
- * 1501
+  * 1501
  * <p>
  * 2939
  * <p>
@@ -36,7 +33,7 @@ import java.util.StringTokenizer;
  * C can be placed before D (500) and M (1000) to make 400 and 900.
  * Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
  */
-public class Solution {
+public class SolutionTest {
 
 
     public int romanToInt(String s) {
@@ -47,22 +44,31 @@ public class Solution {
         int sum = 0;
         //while(st.hasMoreTokens()){
         for (int i = 0; i < s.length(); i++) {
+
             int romanIndex = 0;
             char ch = s.charAt(i);
-            for (int j = 0; j < romans.length; j++) {4
+            for (int j = 0; j < romans.length; j++) {
                 if (romans[j]==ch) {
-                    System.out.println("romans[i]====" + romans[j]);
-                    System.out.println("ch====" + ch);
+                   // System.out.println("romans[i]====" + romans[j]);
+                   // System.out.println("ch====" + ch);
                     romanIndex = j;
+                   // System.out.println("romanIndex ===="+ romanIndex);
                     break;
                 }
-                System.out.println("romanIndex ===="+ romanIndex);
+
             }
-            sum += numbers[romanIndex];
+            //뺼셈
+            if(romanIndex!=0 && numbers[romanIndex-1] < numbers[romanIndex]){
+               sum-= numbers[romanIndex];
+               sum *=-1;
+            }else{
+                //덧셈
+                sum += numbers[romanIndex];
+            }
+
+
+            System.out.println("sum ===="+sum);
         }
-
-
-
         //}
 
         return sum;
@@ -72,12 +78,12 @@ public class Solution {
 
     public void execute() {
         BufferedInputStream bis = new BufferedInputStream(System.in);
-        int result = romanToInt("XII");
+        int result = romanToInt("LVIII");
         System.out.println(result);
     }
 
-    public static void main(String[] args) {
-        new Solution().execute();
+    public  static void  main(String[] args) {
+        new SolutionTest().execute();
     }
 
 }

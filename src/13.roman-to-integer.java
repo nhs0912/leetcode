@@ -77,7 +77,7 @@
  * Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  * 
  */
-class Solution {
+class Solution {/*
     public int romanToInt(String s) {
       
       if( s =="III"){
@@ -85,5 +85,5 @@ class Solution {
         return firstCaseResult;
       }
       return 0;
-    }
+    }*/
 }
