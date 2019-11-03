@@ -35,7 +35,21 @@ import java.io.BufferedInputStream;
  */
 public class SolutionTest {
 
+    enum roman{
 
+        I(1),V(5),X(10),L(50),C(100),D(500),M(1000);
+        int value = 0;
+        roman(int value) {
+            this.value=value;
+        }
+        public int getValue() {
+            return value;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+    }
     public int romanToInt(String s) {
         char[] romans = new char[]{'I', 'V', 'X', 'L', 'C', 'D', 'M'};
         int[] numbers = new int[]{1, 5, 10, 50, 100, 500, 1000};
@@ -44,7 +58,6 @@ public class SolutionTest {
         int sum = 0;
         //while(st.hasMoreTokens()){
         for (int i = 0; i < s.length(); i++) {
-
             int romanIndex = 0;
             char ch = s.charAt(i);
             for (int j = 0; j < romans.length; j++) {
@@ -58,8 +71,8 @@ public class SolutionTest {
 
             }
             //뺼셈
-            if(romanIndex!=0 && numbers[romanIndex-1] < numbers[romanIndex]){
-               sum-= numbers[romanIndex];
+            if(i!=0 && numbers[i-1] < numbers[i]){
+               sum-= numbers[i];
                sum *=-1;
             }else{
                 //덧셈
