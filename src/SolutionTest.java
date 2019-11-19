@@ -54,48 +54,105 @@ public class SolutionTest {
     }
 
     public int romanToInt(String s) {
-        int sum =0;
-        for(int i=0; i<s.length();i++){
+        int sum = 0;
 
+        if (s.length() > 1) {
+            for (int i = 0; i < s.length(); i++) {
+
+                switch (s.charAt(i)) {
+                    case 'I'://1
+                        if (s.charAt(i + 1) == 'V') {
+                            sum += ROMAN.V.value - ROMAN.I.value;
+                            i++;
+                        } else if (s.charAt(i + 1) == 'X') {
+                            sum += ROMAN.X.value - ROMAN.I.value;
+                            i++;
+                        } else {
+                            sum += ROMAN.I.value;
+                        }
+                        break;
+                    case 'V'://5
+                        sum += ROMAN.V.value;
+                        break;
+                    case 'X'://10
+                        if (s.charAt(i + 1) == 'L') {
+                            sum += ROMAN.L.value - ROMAN.X.value;
+                            i++;
+                        } else if (s.charAt(i + 1) == 'C') {
+                            sum += ROMAN.C.value - ROMAN.X.value;
+                            i++;
+                        } else {
+                            sum += ROMAN.X.value;
+                        }
+                        break;
+                    case 'L'://50
+                        sum += ROMAN.L.value;
+                        break;
+                    case 'C'://100
+                        if (s.charAt(i + 1) == 'D') {
+                            sum += ROMAN.D.value - ROMAN.C.value;
+                            i++;
+                        } else if (s.charAt(i + 1) == 'M') {
+                            sum += ROMAN.M.value - ROMAN.C.value;
+                            i++;
+                        } else {
+                            sum += ROMAN.C.value;
+                        }
+                        break;
+                    case 'D'://500
+                        sum += ROMAN.D.value;
+                        break;
+                    case 'M'://1000
+                        sum += ROMAN.M.value;
+                        break;
+                }
+
+                if (i == s.length() - (i + 1)) {
+                    switch (s.charAt(i + 1)) {
+                        case 'I'://1
+                            sum += ROMAN.I.value;
+                            break;
+                        case 'V'://5
+                            sum += ROMAN.V.value;
+                            break;
+                        case 'X'://10
+                            sum += ROMAN.X.value;
+                            break;
+                        case 'L'://50
+                            sum += ROMAN.L.value;
+                            break;
+                        case 'C'://100
+                            sum += ROMAN.C.value;
+                            break;
+                        case 'D'://500
+                            sum += ROMAN.D.value;
+                            break;
+                        case 'M'://1000
+                            sum += ROMAN.M.value;
+                            break;
+
+                    }
+                    return sum;
+                }
+            }
+
+        }else{
+            int i=0;
             switch(s.charAt(i)){
                 case 'I'://1
-                    if(s.charAt(i+1) == 'V'){
-                        sum+=ROMAN.V.value - ROMAN.I.value;
-                        i++;
-                    }else if(s.charAt(i+1) == 'X'){
-                        sum+=ROMAN.X.value - ROMAN.I.value;
-                        i++;
-                    }else {
-                        sum += ROMAN.I.value;
-                    }
+                    sum += ROMAN.I.value;
                     break;
                 case 'V'://5
                     sum+= ROMAN.V.value;
                     break;
                 case 'X'://10
-                    if(s.charAt(i+1) == 'L'){
-                        sum+=ROMAN.L.value - ROMAN.X.value;
-                        i++;
-                    }else if(s.charAt(i+1) == 'C'){
-                        sum+=ROMAN.C.value - ROMAN.X.value;
-                        i++;
-                    }else {
-                        sum+=ROMAN.X.value;
-                    }
+                    sum+=ROMAN.X.value;
                     break;
                 case 'L'://50
                     sum+=ROMAN.L.value;
                     break;
                 case 'C'://100
-                    if(s.charAt(i+1) == 'D'){
-                        sum+=ROMAN.D.value - ROMAN.C.value;
-                        i++;
-                    }else if(s.charAt(i+1) == 'M'){
-                        sum+=ROMAN.M.value - ROMAN.C.value;
-                        i++;
-                    }else {
-                        sum+=ROMAN.C.value;
-                    }
+                    sum+=ROMAN.C.value;
                     break;
                 case 'D'://500
                     sum+=ROMAN.D.value;
@@ -104,36 +161,6 @@ public class SolutionTest {
                     sum+=ROMAN.M.value;
                     break;
             }
-
-             if(i==s.length()-2) {
-                 switch (s.charAt(i + 1)) {
-                     case 'I'://1
-                         sum += ROMAN.I.value;
-                         break;
-                     case 'V'://5
-                         sum += ROMAN.V.value;
-                         break;
-                     case 'X'://10
-                         sum += ROMAN.X.value;
-                         break;
-                     case 'L'://50
-                         sum += ROMAN.L.value;
-                         break;
-                     case 'C'://100
-                         sum += ROMAN.C.value;
-                         break;
-                     case 'D'://500
-                         sum += ROMAN.D.value;
-                         break;
-                     case 'M'://1000
-                         sum += ROMAN.M.value;
-                         break;
-
-                 }
-                 return sum;
-             }
-
-
         }
         return sum;
     }
@@ -141,7 +168,7 @@ public class SolutionTest {
 
     public void execute() {
         BufferedInputStream bis = new BufferedInputStream(System.in);
-        int result = romanToInt("IVI");
+        int result = romanToInt("X");
         System.out.println(result);
     }
 
