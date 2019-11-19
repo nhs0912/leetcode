@@ -3,7 +3,7 @@ import java.io.BufferedInputStream;
 /**
  * 13. Roman to Integer
  * Easy
-  * 1501
+ * 1501
  * <p>
  * 2939
  * <p>
@@ -35,13 +35,15 @@ import java.io.BufferedInputStream;
  */
 public class SolutionTest {
 
-    enum roman{
+    enum ROMAN {
 
-        I(1),V(5),X(10),L(50),C(100),D(500),M(1000);
+        I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
         int value = 0;
-        roman(int value) {
-            this.value=value;
+
+        ROMAN(int value) {
+            this.value = value;
         }
+
         public int getValue() {
             return value;
         }
@@ -50,52 +52,94 @@ public class SolutionTest {
             this.value = value;
         }
     }
+
     public int romanToInt(String s) {
-        char[] romans = new char[]{'I', 'V', 'X', 'L', 'C', 'D', 'M'};
-        int[] numbers = new int[]{1, 5, 10, 50, 100, 500, 1000};
+        int sum =0;
+        for(int i=0; i<s.length();i++){
 
-        //StringTokenizer st = new StringTokenizer(s);
-        int sum = 0;
-        //while(st.hasMoreTokens()){
-        for (int i = 0; i < s.length(); i++) {
-            int romanIndex = 0;
-            char ch = s.charAt(i);
-            for (int j = 0; j < romans.length; j++) {
-                if (romans[j]==ch) {
-                   // System.out.println("romans[i]====" + romans[j]);
-                   // System.out.println("ch====" + ch);
-                    romanIndex = j;
-                   // System.out.println("romanIndex ===="+ romanIndex);
+            switch(s.charAt(i)){
+                case 'I'://1
+                    if(s.charAt(i+1) == 'V'){
+                        sum+=ROMAN.V.value - ROMAN.I.value;
+                    }else if(s.charAt(i+1) == 'X'){
+                        sum+=ROMAN.X.value - ROMAN.I.value;
+                    }else {
+                        sum += ROMAN.I.value;
+                    }
                     break;
-                }
-
+                case 'V'://5
+                    sum+= ROMAN.V.value;
+                    break;
+                case 'X'://10
+                    if(s.charAt(i+1) == 'L'){
+                        sum+=ROMAN.L.value - ROMAN.X.value;
+                    }else if(s.charAt(i+1) == 'C'){
+                        sum+=ROMAN.C.value - ROMAN.X.value;
+                    }else {
+                        sum+=ROMAN.X.value;
+                    }
+                    break;
+                case 'L'://50
+                    sum+=ROMAN.L.value;
+                    break;
+                case 'C'://100
+                    if(s.charAt(i+1) == 'D'){
+                        sum+=ROMAN.D.value - ROMAN.C.value;
+                    }else if(s.charAt(i+1) == 'M'){
+                        sum+=ROMAN.M.value - ROMAN.C.value;
+                    }else {
+                        sum+=ROMAN.C.value;
+                    }
+                    break;
+                case 'D'://500
+                    sum+=ROMAN.D.value;
+                    break;
+                case 'M'://1000
+                    sum+=ROMAN.M.value;
+                    break;
             }
-            //뺼셈
-            if(i!=0 && numbers[i-1] < numbers[i]){
-               sum-= numbers[i];
-               sum *=-1;
-            }else{
-                //덧셈
-                sum += numbers[romanIndex];
-            }
+
+             if(i==s.length()-2) {
+                 switch (s.charAt(i + 1)) {
+                     case 'I'://1
+                         sum += ROMAN.I.value;
+                         break;
+                     case 'V'://5
+                         sum += ROMAN.V.value;
+                         break;
+                     case 'X'://10
+                         sum += ROMAN.X.value;
+                         break;
+                     case 'L'://50
+                         sum += ROMAN.L.value;
+                         break;
+                     case 'C'://100
+                         sum += ROMAN.C.value;
+                         break;
+                     case 'D'://500
+                         sum += ROMAN.D.value;
+                         break;
+                     case 'M'://1000
+                         sum += ROMAN.M.value;
+                         break;
+
+                 }
+                 return sum;
+             }
 
 
-            System.out.println("sum ===="+sum);
         }
-        //}
-
         return sum;
-
     }
 
 
     public void execute() {
         BufferedInputStream bis = new BufferedInputStream(System.in);
-        int result = romanToInt("LVIII");
+        int result = romanToInt("III");
         System.out.println(result);
     }
 
-    public  static void  main(String[] args) {
+    public static void main(String[] args) {
         new SolutionTest().execute();
     }
 
