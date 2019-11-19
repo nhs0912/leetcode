@@ -61,8 +61,10 @@ public class SolutionTest {
                 case 'I'://1
                     if(s.charAt(i+1) == 'V'){
                         sum+=ROMAN.V.value - ROMAN.I.value;
+                        i++;
                     }else if(s.charAt(i+1) == 'X'){
                         sum+=ROMAN.X.value - ROMAN.I.value;
+                        i++;
                     }else {
                         sum += ROMAN.I.value;
                     }
@@ -73,8 +75,10 @@ public class SolutionTest {
                 case 'X'://10
                     if(s.charAt(i+1) == 'L'){
                         sum+=ROMAN.L.value - ROMAN.X.value;
+                        i++;
                     }else if(s.charAt(i+1) == 'C'){
                         sum+=ROMAN.C.value - ROMAN.X.value;
+                        i++;
                     }else {
                         sum+=ROMAN.X.value;
                     }
@@ -85,8 +89,10 @@ public class SolutionTest {
                 case 'C'://100
                     if(s.charAt(i+1) == 'D'){
                         sum+=ROMAN.D.value - ROMAN.C.value;
+                        i++;
                     }else if(s.charAt(i+1) == 'M'){
                         sum+=ROMAN.M.value - ROMAN.C.value;
+                        i++;
                     }else {
                         sum+=ROMAN.C.value;
                     }
@@ -135,7 +141,7 @@ public class SolutionTest {
 
     public void execute() {
         BufferedInputStream bis = new BufferedInputStream(System.in);
-        int result = romanToInt("III");
+        int result = romanToInt("IVI");
         System.out.println(result);
     }
 
