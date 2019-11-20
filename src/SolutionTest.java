@@ -107,7 +107,7 @@ public class SolutionTest {
                         break;
                 }
 
-                if (i == s.length() - (i + 1)) {
+                if (i+1 == s.length() -1) {
                     switch (s.charAt(i + 1)) {
                         case 'I'://1
                             sum += ROMAN.I.value;
@@ -137,6 +137,7 @@ public class SolutionTest {
             }
 
         }else{
+            //한자릿 글자일 때
             int i=0;
             switch(s.charAt(i)){
                 case 'I'://1
@@ -168,7 +169,7 @@ public class SolutionTest {
 
     public void execute() {
         BufferedInputStream bis = new BufferedInputStream(System.in);
-        int result = romanToInt("X");
+        int result = romanToInt("LVIII");
         System.out.println(result);
     }
 

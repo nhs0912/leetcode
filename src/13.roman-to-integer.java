@@ -1,3 +1,5 @@
+import java.io.BufferedInputStream;
+
 /*
  * @lc app=leetcode id=13 lang=java
  *
@@ -77,13 +79,146 @@
  * Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  * 
  */
-class Solution {/*
+class Solution {
+     enum ROMAN {
+
+        I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
+        int value = 0;
+
+        ROMAN(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+    }
+
     public int romanToInt(String s) {
-      
-      if( s =="III"){
-        int firstCaseResult =3;
-        return firstCaseResult;
-      }
-      return 0;
-    }*/
+        int sum = 0;
+
+        if (s.length() > 1) {
+            for (int i = 0; i < s.length(); i++) {
+
+                switch (s.charAt(i)) {
+                    case 'I'://1
+                        if (s.charAt(i + 1) == 'V') {
+                            sum += ROMAN.V.value - ROMAN.I.value;
+                            i++;
+                        } else if (s.charAt(i + 1) == 'X') {
+                            sum += ROMAN.X.value - ROMAN.I.value;
+                            i++;
+                        } else {
+                            sum += ROMAN.I.value;
+                        }
+                        break;
+                    case 'V'://5
+                        sum += ROMAN.V.value;
+                        break;
+                    case 'X'://10
+                        if (s.charAt(i + 1) == 'L') {
+                            sum += ROMAN.L.value - ROMAN.X.value;
+                            i++;
+                        } else if (s.charAt(i + 1) == 'C') {
+                            sum += ROMAN.C.value - ROMAN.X.value;
+                            i++;
+                        } else {
+                            sum += ROMAN.X.value;
+                        }
+                        break;
+                    case 'L'://50
+                        sum += ROMAN.L.value;
+                        break;
+                    case 'C'://100
+                        if (s.charAt(i + 1) == 'D') {
+                            sum += ROMAN.D.value - ROMAN.C.value;
+                            i++;
+                        } else if (s.charAt(i + 1) == 'M') {
+                            sum += ROMAN.M.value - ROMAN.C.value;
+                            i++;
+                        } else {
+                            sum += ROMAN.C.value;
+                        }
+                        break;
+                    case 'D'://500
+                        sum += ROMAN.D.value;
+                        break;
+                    case 'M'://1000
+                        sum += ROMAN.M.value;
+                        break;
+                }
+
+                if (i+1 == s.length() -1) {
+                    switch (s.charAt(i + 1)) {
+                        case 'I'://1
+                            sum += ROMAN.I.value;
+                            break;
+                        case 'V'://5
+                            sum += ROMAN.V.value;
+                            break;
+                        case 'X'://10
+                            sum += ROMAN.X.value;
+                            break;
+                        case 'L'://50
+                            sum += ROMAN.L.value;
+                            break;
+                        case 'C'://100
+                            sum += ROMAN.C.value;
+                            break;
+                        case 'D'://500
+                            sum += ROMAN.D.value;
+                            break;
+                        case 'M'://1000
+                            sum += ROMAN.M.value;
+                            break;
+
+                    }
+                    return sum;
+                }
+            }
+
+        }else{
+            //한자릿 글자일 때
+            int i=0;
+            switch(s.charAt(i)){
+                case 'I'://1
+                    sum += ROMAN.I.value;
+                    break;
+                case 'V'://5
+                    sum+= ROMAN.V.value;
+                    break;
+                case 'X'://10
+                    sum+=ROMAN.X.value;
+                    break;
+                case 'L'://50
+                    sum+=ROMAN.L.value;
+                    break;
+                case 'C'://100
+                    sum+=ROMAN.C.value;
+                    break;
+                case 'D'://500
+                    sum+=ROMAN.D.value;
+                    break;
+                case 'M'://1000
+                    sum+=ROMAN.M.value;
+                    break;
+            }
+        }
+        return sum;
+    }
+
+
+    public void execute() {
+        BufferedInputStream bis = new BufferedInputStream(System.in);
+        int result = romanToInt("LVIII");
+        System.out.println(result);
+    }
+
+    public static void main(String[] args) {
+        new Solution().execute();
+    }
 }
