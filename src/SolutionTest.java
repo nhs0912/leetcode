@@ -68,7 +68,7 @@ public class SolutionTest {
                    // System.out.println("romanIndex ===="+ romanIndex);
                     break;
                 }
-
+//TEST
             }
             //뺼셈
             if(i!=0 && numbers[i-1] < numbers[i]){
