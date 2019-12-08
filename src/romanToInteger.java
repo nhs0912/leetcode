@@ -3,7 +3,7 @@ import java.io.BufferedInputStream;
 /**
  * 13. Roman to Integer
  * Easy
-  * 1501
+ * 1501
  * <p>
  * 2939
  * <p>
@@ -33,7 +33,7 @@ import java.io.BufferedInputStream;
  * C can be placed before D (500) and M (1000) to make 400 and 900.
  * Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
  */
-public class SolutionTest {
+public class romanToInteger {
 
     enum roman{
 
@@ -62,18 +62,18 @@ public class SolutionTest {
             char ch = s.charAt(i);
             for (int j = 0; j < romans.length; j++) {
                 if (romans[j]==ch) {
-                   // System.out.println("romans[i]====" + romans[j]);
-                   // System.out.println("ch====" + ch);
+                    // System.out.println("romans[i]====" + romans[j]);
+                    // System.out.println("ch====" + ch);
                     romanIndex = j;
-                   // System.out.println("romanIndex ===="+ romanIndex);
+                    // System.out.println("romanIndex ===="+ romanIndex);
                     break;
                 }
                 //TEST
             }
             //뺼셈
             if(i!=0 && numbers[i-1] < numbers[i]){
-               sum-= numbers[i];
-               sum *=-1;
+                sum-= numbers[i];
+                sum *=-1;
             }else{
                 //덧셈
                 sum += numbers[romanIndex];
@@ -96,7 +96,7 @@ public class SolutionTest {
     }
 
     public  static void  main(String[] args) {
-        new SolutionTest().execute();
+        new romanToInteger().execute();
     }
 
 }
